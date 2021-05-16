@@ -115,9 +115,21 @@ terraform init
 # Terraform plan which shows all the infrastructure that will be deployed
 terraform plan
 
-# Terraform apply which will deploy all the necessary infrastructure on AWS
-terraform apply
+# Once all the deployable resources look correct in the plan
 
+# Terraform apply which will deploy all the necessary infrastructure on AWS
+terraform apply # You will have to enter 'yes' in the input for final confirmation
+
+```
+
+Since there are a lot of resources that are being deployed - 31 Resources - it might take some time (~20 mins). Please be **patient**.
+
+## WARNING ##
+
+Make sure to destroy all your infrastructure once testing is done since these resources are not eligible to be used with the **FREE** AWS Tier. 
+
+```shell
+terraform destroy
 ```
 
 ### Features
