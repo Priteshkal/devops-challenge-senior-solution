@@ -3,8 +3,8 @@ variable "region" {
   default = "us-east-1"
 }
 
-variable "cluster-name" {
-  default = "terraform-eks"
+variable "cluster_name" {
+  default = "particle41_eks_cluster"
   type    = string
 }
 
