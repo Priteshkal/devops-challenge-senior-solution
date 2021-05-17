@@ -41,7 +41,7 @@ Other criteria for evaluation will be:
 
 ### Operating System Version
 
-This documentation is written for macOS High Sierra. If you are running
+This documentation is written for macOS High Sierra and above. If you are running
 an older version, it is recommended to upgrade before proceeding. Use
 this [Apple Support KB](https://support.apple.com/en-us/HT201260) to
 identify and verify the macOS version you are using.
