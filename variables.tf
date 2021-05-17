@@ -7,5 +7,3 @@ variable "cluster_name" {
   default = "particle41_eks_cluster"
   type    = string
 }
-
-data "aws_availability_zones" "available" {}
