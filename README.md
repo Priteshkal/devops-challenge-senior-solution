@@ -89,6 +89,7 @@ brew install awscli
 ```
 
 [Configure AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)
+Make sure your user has **"Admin"** privilages but is not **"root"** (Best Practices) - Ask your AWS Administrator to create a user for you and send you access keys to be able to use AWS CLI. 
 
 ```shell
 aws configure
