@@ -3,7 +3,7 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "12.2.0"
 
-  cluster_name    = "${var.cluster_name}"
+  cluster_name    = var.cluster_name
   cluster_version = "1.17"
   subnets         = module.vpc.private_subnets
 
@@ -14,8 +14,7 @@ module "eks" {
       desired_capacity = 2
       max_capacity     = 2
       min_capacity     = 2
-
-      instance_type = "${var.eksnode_instance_type}"
+      instance_type    = var.eksnode_instance_type
     }
   }
 

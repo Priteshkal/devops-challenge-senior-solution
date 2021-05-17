@@ -133,7 +133,7 @@ terraform apply # You will have to enter 'yes' in the input for final confirmati
 
 ```
 
-Since there are a lot of resources that are being deployed - 39 Resources - it might take some time (~20 mins). Please be **patient**.
+Since there are a lot of resources that are being deployed - 38 Resources - it might take some time (~20 mins). Please be **patient**.
 
 ## WARNING ##
 
