@@ -152,7 +152,7 @@ terraform destroy # You will have to enter 'yes' in the input for final confirma
 
 - Added a `README.md` to the root directory of your project, with instructions for the team to deploy the infrastructure you created.
 
-- Code published to a public [Git repository](https://github.com/Priteshkal/devops-challenge-senior-solution.git)in GitHub.
+- Code published to a public [Git repository](https://github.com/Priteshkal/devops-challenge-senior-solution.git) in GitHub.
 
 ## Inputs
 
