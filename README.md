@@ -66,6 +66,8 @@ brew update
 
 We need Git, Terraform and AWS CLI installed and configured to deploy infrastructure in AWS using Terraform.
 
+We will be using Terraform v0.13.5 because the latest version of [AWS EKS module](https://github.com/terraform-aws-modules/terraform-aws-eks) creates all the resources including EKS Cluster and Nodes but returns an error `NodeCreationFailure: Instances failed to join the kubernetes cluster.` - There is an open issue for this - [OPEN GIT HUB ISSUE](https://github.com/hashicorp/terraform-cdk/issues/409)
+
 ``` shell
 # GIT
 # https://git-scm.com/download/mac
@@ -75,8 +77,11 @@ brew install git
 # https://formulae.brew.sh/formula/terraform
 brew install terraform
 
-# Test to ensure latest version of Terraform 0.15
+# Test to ensure latest version of Terraform 0.15.3
 terraform --version
+
+# tfenv
+brew install tfenv
 
 # AWS CLI
 # https://formulae.brew.sh/formula/awscli#default
@@ -101,6 +106,12 @@ Clone this repo.
 git clone https://github.com/Priteshkal/devops-challenge-senior-solution.git
 
 cd devops-challenge-senior-solution
+
+# We need to install terraform v0.13.5
+tfenv install 0.13.5 
+
+# We need to use Terraform v0.13.5 due to previous mentioned reason
+tfenv use 0.13.5
 ```
 
 ## POST SETUP
@@ -134,10 +145,32 @@ terraform destroy # You will have to enter 'yes' in the input for final confirma
 
 ### Features
 
-- Code to deploy a VPC (10.0.0.0/16) in AWS with 2 public (10.0.0.0/24 & 10.0.1.0/24) and 2 private (10.0.100.0/24 & 10.0.101.0/24) subnets .
+- Code to deploy a VPC (10.0.0.0/16) in AWS with 2 public (10.0.100.0/24 & 10.0.101.0/24) and 2 private (10.0.1.0/24 & 10.0.2.0/24) subnets.
 
 - Code to deploy an EKS cluster in AWS, which will use the VPC created in the previous step. The cluster has 2 nodes, with instance type `t3a.large`. The nodes must be on the private subnets only.
 
 - Added a `README.md` to the root directory of your project, with instructions for the team to deploy the infrastructure you created.
 
 - Code published to a public [Git repository](https://github.com/Priteshkal/devops-challenge-senior-solution.git)in GitHub.
+
+## Inputs
+
+| Name | Description | Required | Type | Default Value |
+|------|-------------|----------|------|---------------|
+| region | AWS Deployment Region | string | no | "us-east-1" |
+| cluster_name | AWS Cluster Name | string | no | "particle41_eks_cluster" |
+| vpc_name | AWS VPC Name | string | no | "particle41-vpc-eks" |
+| eksnode_instance_type | EKS Node Instance Type | string | no | "t3a.large" |
+| vpc_cidr | VPC CIDR Block  | string | no | "10.0.0.0/16" |
+| private_subnets | VPC Private Subnets | list | no | ["10.0.1.0/24", "10.0.2.0/24"] |
+| public_subnets | VPC Private Subnets | list | no | ["10.0.100.0/24", "10.0.101.0/24"] |
+
+
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| cluster_endpoint | Endpoint for EKS control plane. |
+| kubeconfig| Kubernetes Config on Nodes |
+| region | AWS Deployment Region |

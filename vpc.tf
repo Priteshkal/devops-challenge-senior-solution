@@ -1,16 +1,24 @@
 module "vpc" {
-  source = "git::https://github.com/terraform-aws-modules/terraform-aws-vpc.git"
-  name = "vpc-for-eks"
-  cidr = "10.0.0.0/16"
+  # Module being imported from https://github.com/terraform-aws-modules/terraform-aws-vpc/
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "2.47.0"
 
-  azs               = ["${var.region}a", "${var.region}b"]
-  public_subnets    = ["10.0.1.0/24", "10.0.2.0/24"]
-  private_subnets   = ["10.0.101.0/24", "10.0.102.0/24"]
+  name                 = var.vpc_name
+  cidr                 = var.vpc_cidr
+  azs                  = data.aws_availability_zones.available.names
+  private_subnets      = var.private_subnets
+  public_subnets       = var.public_subnets
+  enable_nat_gateway   = true
+  single_nat_gateway   = true
+  enable_dns_hostnames = true
 
-  enable_nat_gateway = false
-  single_nat_gateway = true
+  public_subnet_tags = {
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    "kubernetes.io/role/elb"                      = "1"
+  }
 
-  vpc_tags = {
-    Name = "vpc-for-eks"
+  private_subnet_tags = {
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    "kubernetes.io/role/internal-elb"             = "1"
   }
 }
